@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const LobbyLayout = () => {
   return (
     <MainLayout>
-      <div className="w-full h-full flex flex-col gap-3">
+      <div className="w-full flex flex-col gap-3">
         <Button>hello world</Button>
         <Button>hello world</Button>
         <Button>hello world</Button>
