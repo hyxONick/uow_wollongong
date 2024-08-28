@@ -30,6 +30,7 @@ model User {
 model Comment {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   comment String
+  like     Int
   post    Post   @relation(fields: [postId], references: [id])
   postId  String @db.ObjectId
 }
