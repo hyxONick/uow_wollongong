@@ -19,20 +19,21 @@ model Post {
   comments Comment[]
 }
 
+model Comment {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  comment String
+  like    Int
+  post    Post   @relation(fields: [postId], references: [id])
+  postId  String @db.ObjectId
+}
+
 model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   email   String   @unique
   name    String?
   address Address?
   posts   Post[]
-}
-
-model Comment {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  comment String
-  like     Int
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
+  comment Comment[]
 }
 
 // Address is an embedded document
