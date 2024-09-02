@@ -17,7 +17,6 @@ model Comment {
   postId  String @db.ObjectId
   commentId String?  @db.ObjectId
   createdAt DateTime  @default(now())
-  updatedAt DateTime
   isDeleted Boolean   @default(false)
 }
 
@@ -28,11 +27,12 @@ model Post {
   body     String
   like     Int
   category String
+  picUrls   String[]
   author   User      @relation(fields: [authorId], references: [id])
   authorId String    @db.ObjectId
   comments Comment[]
   createdAt DateTime  @default(now())
-  updatedAt DateTime
+  updatedAt DateTime?
   isDeleted Boolean   @default(false)
 }
 
@@ -45,7 +45,7 @@ model User {
   posts   Post[]
   comments Comment[]
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime?
   isDeleted Boolean   @default(false)
 }
 
