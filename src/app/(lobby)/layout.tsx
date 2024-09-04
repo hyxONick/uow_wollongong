@@ -10,7 +10,7 @@ const LobbyLayout = () => {
       <Layout>
         <Sider>sider</Sider>
         <Content>
-          <Button>hello world</Button>
+          <Button type="primary">hello world</Button>
         </Content>
       </Layout>
     </Layout>
