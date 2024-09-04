@@ -1,40 +1,19 @@
-import { MainLayout } from "@/components/layouts/main-layout";
-import { Button } from "@/components/ui/button";
+import { Button, Layout } from "antd";
+import { Content, Header } from "antd/es/layout/layout";
+import Sider from "antd/es/layout/Sider";
 
 const LobbyLayout = () => {
   return (
-    <MainLayout>
-      <div className="w-full flex flex-col gap-3">
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world</Button>
-        <Button>hello world123</Button>
-      </div>
-    </MainLayout>
+    <Layout>
+      <Header>header</Header>
+
+      <Layout>
+        <Sider>sider</Sider>
+        <Content>
+          <Button>hello world</Button>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
