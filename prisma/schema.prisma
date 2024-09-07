@@ -7,6 +7,19 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Comment {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  comment String
+  likes    Like[]
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId String    @db.ObjectId
+  post    Post   @relation(fields: [postId], references: [id])
+  postId  String @db.ObjectId
+  commentId String?  @db.ObjectId
+  createdAt DateTime  @default(now())
+  isDeleted Boolean   @default(false)
+}
+
 model Post {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   slug     String    @unique
@@ -14,24 +27,26 @@ model Post {
   body     String
   like     Int
   category String
+  picUrls   String[]
   author   User      @relation(fields: [authorId], references: [id])
   authorId String    @db.ObjectId
   comments Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  isDeleted Boolean   @default(false)
 }
 
 model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId String   @unique
   email   String   @unique
   name    String?
   address Address?
   posts   Post[]
-}
-
-model Comment {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  comment String
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
+  comments Comment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  isDeleted Boolean   @default(false)
 }
 
 // Address is an embedded document
@@ -40,4 +55,10 @@ type Address {
   city   String
   state  String
   zip    String
+}
+
+// DateTime: new Date()
+type Like {
+  authorId String
+  creatAt  DateTime @default(now())
 }
