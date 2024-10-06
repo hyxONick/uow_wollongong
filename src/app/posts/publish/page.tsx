@@ -4,6 +4,7 @@ import { Flex, Typography } from "antd";
 import { Button, Form, Input, Select } from "antd";
 import type { UploadFile } from "antd";
 import { ImageUpload } from "./_components/imageUpload";
+import { createPost } from "@/app/services/post";
 const { Title } = Typography;
 const { TextArea } = Input;
 
@@ -19,8 +20,36 @@ const NewPublish: React.FC = () => {
 
   const maxImages = 9;
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const handleSubmit = async (values: any) => {
+    try {
+      // 提取上传图片的 URL
+      const picUrls = fileList.map(file => file.url || "");
+
+      // // 准备提交的数据
+      const postData = {
+        slug: values.title.toLowerCase().replace(/\s+/g, "-"),
+        title: values.title,
+        body: values.Content,
+        like: 0, // 默认 0 点赞
+        category: values.topics || "Others",
+        picUrls,
+        authorId: "670280b6aefbd3915c3e8069", // 假设 authorId 是固定的（应替换为实际用户的 ID）从localStroage里面拿
+      };
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+      const data = await res.json();
+      console.log('Post created:', data);
+      // // 调用 createPost 创建帖子
+      // const createdPost = await createPost(postData);
+      console.log("Post created successfully:", handleSubmit);
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
 
   return (
